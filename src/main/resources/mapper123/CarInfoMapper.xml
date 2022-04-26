@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ws.demo.dao.noplus.CarInfoDBMapper">
+
+    <sql id="columns">
+        CarID,TaskId, Bodywork,
+        EngineNo, VIN, RegisterDate,
+        LicenseYear, CarFullName, CarBasicId,
+        SerieId, ProducerId, BranId,
+        Transmission, Exhaust, CarUseType,
+        OrginalPrice, FoAssuranceDate, IsHaveAssuranceRecord,
+        Mileage, IsEffluentYellow, AnnualDetection,
+        CarBodyColor, LicensProvince, LicensCity,
+        IsNew, TransferDate, IsHaveMainTenance,
+        IsHavePurchaseTax, CarShipTaxExpireYear,
+        DetectionYear, IsHaveFoAssurance, FoAssuranceDateYear,
+        IsHaveComAssurance, IsHaveComAssuranceYear,
+        ComAssuranceMoney, LicenseCar, IsCompleteEngineNumber,
+        IsChangeEngineNumber, CarModel, IsInDetail,
+        DetectOuterInfo, DetectInnerInfo, DetectSkeletonInfo,
+        OuterSheetMetal, SkeletonSheetMetal, Owner,
+        DrivingCertification, Registration, BuyingReceipt,
+        TransferInvoice, TransferCount, ExplainBook,
+        CarKeys, MaintenanceKM, LicenseCarStatue,
+        CarOriginalColor, FuelType, NoticeNumber,
+        IsRefit, CityAreaId, IsHaveCarShiptax,
+        ExchangeWithLicense, IsHaveCard, CarBody,
+        PracticalMileage, NewCarWarranty, IsButlerService,
+        ConditionGrade, DynamicDetection, ParkingNumber,
+        OuterPic, InnerPic, SkeletonPic,
+        OuterImplicitPic, SkeletonImplicitPic,
+        Transfer_Type, Fee, Dealer_Price,
+        Law_Less_Blame, Modified_Vesting_Party,
+        Formalities_Get, Formalities_Lost, Formalities_Transaction,
+        Formalities_Retroactive, XCP_Car_ID, Price_User,
+        Price_User_Moblie, Transfer_MarketID, Publish_Tvuid,
+        Purchase_Price, CarType, CarLocation,
+        ArrangeItemStr, IsChangeFee, ConditionGradeSmall,
+        UniqueId, UniqueSerial, ScrapDate,
+        SelfInsurance, AnnualValidity, DeviceModel,
+        ProxyTvaID, ChakeVersion, SourceFrom,
+        IsBubbleCar, ClientId, MobileDeviceOS,
+        ProxyFee, CarConfigKey, Papers,
+        PeccancyDays, PeccancyScore, PeccancyYuan,
+        wtVIN, wtLicenseCar, wtEngineNo,
+        JQSelfInsurance, IsSmallReport, IsAnnualValidity,
+        AppearancePaint, SkeletonPaint, Eid,
+        Dealer_Price_Total, Is_Ledger, RedbookName,
+        SuperiorName, CertificateCard, FactoryCode,
+        NewCarPhoto, TheNewCar, MaintainManual,
+        EnvironmentalID, toVINCarModel, toCarModel,
+        MaintenanceID, U2Status, RecheckStatus,
+        SourceTo, IsBubbleCarAuto, ConditionScoreAuto,
+        CarConfigInfo, CarOtherConfigInfo, Explain,
+        RefitContent, ChairContent, GasbagContent,
+        RecheckExplain, YxpXdrAccout, YxpXdrName,
+        ConditionGradeAuto, TeShuYongTu,
+        checkLevel,checkLevelDesc,SourceType,PicServerType
+    </sql>
+
+    <select id="getCarDetailForReport3And5" resultType="com.ws.demo.entity.CarInfoDO">
+        select
+        <include refid="columns"> </include>
+        from CarInfo
+        where CarId=#{carId}
+    </select>
+
+    <select id="getIsSmallReport" resultType="java.lang.Integer">
+        select TOP 1 ISNULL(IsSmallReport,0)
+        from CarInfo
+        where CarId=#{carId}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ws.demo.dao.fenbiao.CarResourcesMapper">
+
+    <sql id="columns">
+        `type`,source_content,explains,task_id ,car_id ,report_id ,tester_id ,tester_name , module_id ,
+  item_id ,module_items_alias_name ,detail_id , item_details_alias_name
+  ,source_id,source_hash ,ext ,sort ,status ,create_time ,update_time ,delete_time ,label
+
+    </sql>
+
+    <select id="selectCarResources" resultType="com.ws.demo.entity.CarResourcesEntity">
+        select
+        <include refid="columns">
+        </include>
+        from mp_dt_car_resources
+        where report_id=#{reportId}
+        AND status=1
+    </select>
+
+    <insert id="batchInsert" parameterType="com.ws.demo.entity.CarResourcesEntity">
+        insert into mp_dt_car_resources
+        (
+        `type`,source_content,explains,car_id,
+        task_id,report_id,tester_id,tester_name,module_id,item_id,
+        module_items_alias_name,detail_id,item_details_alias_name,
+        source_id,sort,status,ext
+        )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.type},#{item.sourceContent},#{item.explains},#{item.carId},
+            #{item.taskId},#{item.reportId},#{item.testerId},#{item.testerName},#{item.moduleId},#{item.itemId},
+            #{item.moduleItemsAliasName},#{item.detailId},#{item.itemDetailsAliasName},
+            #{item.sourceId},#{item.sort},#{item.status},#{item.ext}
+            )
+        </foreach>
+    </insert>
+
+    <update id="batchDelete" parameterType="java.lang.Integer">
+        update mp_dt_car_resources
+        set status = 2
+        where module_id = #{moduleId} and report_id = #{reportId}
+    </update>
+</mapper>
